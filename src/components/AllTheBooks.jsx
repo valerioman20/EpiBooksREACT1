@@ -1,23 +1,32 @@
-import React from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Row, Col, Form } from 'react-bootstrap';
 import './AllTheBooks.css';
+import SingleBook from './SingleBook';
 
 export default function AllTheBooks(props) {
-  console.log(props.books);
+
+  const [search, setSearch] = useState("")
   return (
-    <Row>
-      {props.books.map(book => (
-        <Col key={book.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-          <Card className="card" style={{ width: '16rem' }}>
-            <div className="card-img-container">
-              <Card.Img variant="top" src={book.img} />
-            </div>
-            <Card.Body>
-              <Card.Title>{book.title}</Card.Title>
-            </Card.Body>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+    <>
+      <Row>
+        <Col>
+          <Form.Group className="mb-3" >
+            <Form.Control 
+            type="search" 
+            placeholder="Cerca Libro..." 
+            value={search}
+            onChange={(e)=>setSearch(e.target.value)}
+             />
+          </Form.Group>
+           </Col>
+      </Row>
+      <Row>
+        {props.books
+        .filter(book => book.title.toLowerCase().includes(search))
+        .map(book => (
+          <SingleBook key={book.asin} book={book} />
+        ))}
+      </Row>
+    </>
   );
 }
