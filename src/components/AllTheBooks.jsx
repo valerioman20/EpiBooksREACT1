@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
-import { Row, Col, Form } from 'react-bootstrap';
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import './AllTheBooks.css';
 import SingleBook from './SingleBook';
 
-export default function AllTheBooks(props) {
-
-  const [search, setSearch] = useState("")
+export default function AllTheBooks({ books, search }) {
   return (
     <>
       <Row>
         <Col>
-          <Form.Group className="mb-3" >
-            <Form.Control 
-            type="search" 
-            placeholder="Cerca Libro..." 
-            value={search}
-            onChange={(e)=>setSearch(e.target.value)}
-             />
-          </Form.Group>
-           </Col>
+          {}
+        </Col>
       </Row>
       <Row>
-        {props.books
-        .filter(book => book.title.toLowerCase().includes(search))
-        .map(book => (
-          <SingleBook key={book.asin} book={book} />
-        ))}
+        {books
+          .filter(book => book.title.toLowerCase().includes(search.toLowerCase()))
+          .map(book => (
+            <Col key={book.asin} xs={12} sm={6} md={4} lg={3} className="mb-4">
+              <SingleBook book={book} />
+            </Col>
+          ))}
       </Row>
     </>
   );

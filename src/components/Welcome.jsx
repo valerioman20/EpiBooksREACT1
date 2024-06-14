@@ -6,7 +6,7 @@ const Welcome = () => {
         <div>
 
             <Alert className="my-3" variant="info">
-                Benvenuto nella nostra applicazione!
+                Benvenuto in EpiBooks!
             </Alert>
             <div class="container-fluid">
                 <h1>EpiBooks</h1>

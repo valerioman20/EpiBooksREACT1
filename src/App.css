@@ -1,1 +1,16 @@
 
+.comment-area {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  
+  .card-img-container {
+    cursor: pointer;
+  }
+  
+  .card-body {
+    cursor: pointer;
+  }
