@@ -6,7 +6,7 @@ import logo from '../assets/epibooks.svg.svg';
 function MyNav({ search, setSearch }) {
   return (
   <Container>
-   <Navbar expand="lg" className="bg-body-tertiary">
+   <Navbar expand="lg" className="bg-white">
    <Link to="/">
           <Navbar.Brand href="#">
             <img

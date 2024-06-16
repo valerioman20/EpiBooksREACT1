@@ -4,7 +4,8 @@ import '@testing-library/jest-dom';
 import Welcome from './Welcome';
 import App from '../App';
 import fantasy from '@/books/fantasy.json';
-
+import AllTheBooks from '../components/AllTheBooks';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 /*TEST 1 */
@@ -37,9 +38,20 @@ test('Verifica che il componente CommentArea venga renderizzato correttamente', 
 
 
 /*TEST 4 */
+function renderWithRouter(ui, { route = '/' } = {}) {   /*qui ho dovuto fornire il contesto del router ai componenti durante il test.*/
+  window.history.pushState({}, 'Test page', route);
+  return render(ui, { wrapper: Router });
+}
 
-
-
+test('Filtra i libri in base al titolo inserito nella barra di ricerca', () => {
+  renderWithRouter(<AllTheBooks books={fantasy} search="Witcher" />);
+  expect(screen.getByText("The Last Wish: Introducing the Witcher")).toBeInTheDocument();
+  expect(screen.getByText("Sword of Destiny (The Witcher)")).toBeInTheDocument();
+  expect(screen.queryByText("D&D MORDENKAINEN'S TOME OF FOES (Dungeons & Dragons)")).toBeNull();
+  expect(screen.queryByText("Destiny Grimoire Anthology, Volume II: Fallen Kingdoms")).toBeNull();
+  expect(screen.queryByText("D&D Waterdeep Dragon Heist HC (Dungeons & Dragons)")).toBeNull();
+  expect(screen.queryByText("American Gods: The Tenth Anniversary Edition: A Novel")).toBeNull();
+});
 
 /*TEST 5*/
 test('Verifica che, cliccando su un libro, il suo bordo cambi colore', () => {
